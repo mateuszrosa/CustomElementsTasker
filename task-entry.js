@@ -3,7 +3,6 @@ class TaskEntry extends HTMLElement {
     super();
     this.repo = new TaskRepository();
     this._task = null;
-    console.log("object");
   }
 
   set task(task) {
@@ -17,8 +16,11 @@ class TaskEntry extends HTMLElement {
                           <span>${this._task.date}</span>
                           <p>${this._task.text}</p>
                         </label>
-                        <button>Usuń</button>
+                        <button class="remove-btn">Usuń</button>
                       </div>`;
+    this.querySelector(".remove-btn").addEventListener("click", () =>
+      this.onRemove()
+    );
   }
 
   onRemove() {

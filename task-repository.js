@@ -19,6 +19,11 @@ class TaskRepository {
     this.onChange();
   }
 
+  remove(taskId) {
+    this.tasks = this.tasks.filter((t) => t.id !== taskId);
+    this.onChange();
+  }
+
   subscribe(subscriber) {
     this.subscribers.push(subscriber);
   }

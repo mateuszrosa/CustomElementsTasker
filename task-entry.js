@@ -10,9 +10,12 @@ class TaskEntry extends HTMLElement {
   }
 
   connectedCallback() {
+    console.log(this._task);
     this.innerHTML = `<div>
                         <label>
-                          <input type="checkbox" />
+                          <input type="checkbox" ${
+                            this._task.completed ? "checked" : null
+                          }/>
                           <span>${this._task.date}</span>
                           <p>${this._task.text}</p>
                         </label>
@@ -21,10 +24,17 @@ class TaskEntry extends HTMLElement {
     this.querySelector(".remove-btn").addEventListener("click", () =>
       this.onRemove()
     );
+    this.querySelector('input[type="checkbox"]').addEventListener("click", () =>
+      this.onChange()
+    );
   }
 
   onRemove() {
     this.repo.remove(this._task.id);
+  }
+
+  onChange() {
+    this.repo.updateCompleted(this._task.id, this._task.completed);
   }
 }
 

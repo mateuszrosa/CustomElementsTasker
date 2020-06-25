@@ -10,8 +10,14 @@ class TaskEntry extends HTMLElement {
   }
 
   connectedCallback() {
-    console.log(this._task);
-    this.innerHTML = `<div>
+    const shadowRoot = this.attachShadow({ mode: "closed" });
+    shadowRoot.innerHTML = `
+                  <style>
+                    button.remove-btn {
+                      color: blue;
+                    }
+                  </style>
+                      <div>
                         <label>
                           <input type="checkbox" ${
                             this._task.completed ? "checked" : null
@@ -21,12 +27,12 @@ class TaskEntry extends HTMLElement {
                         </label>
                         <button class="remove-btn">Usuń</button>
                       </div>`;
-    this.querySelector(".remove-btn").addEventListener("click", () =>
-      this.onRemove()
-    );
-    this.querySelector('input[type="checkbox"]').addEventListener("click", () =>
-      this.onChange()
-    );
+    shadowRoot
+      .querySelector(".remove-btn")
+      .addEventListener("click", () => this.onRemove());
+    shadowRoot
+      .querySelector('input[type="checkbox"]')
+      .addEventListener("click", () => this.onChange());
   }
 
   onRemove() {

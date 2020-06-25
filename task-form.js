@@ -5,14 +5,13 @@ class TaskForm extends HTMLElement {
     this.mapper = new TaskMapper();
   }
   connectedCallback() {
-    const shadowRoot = this.attachShadow({ mode: "closed" });
-    shadowRoot.innerHTML = `<form>
+    this.innerHTML = `<form>
     <input />
     <input type="date" />
     <button>Dodaj</button>
     </form>`;
 
-    const form = shadowRoot.querySelector("form");
+    const form = document.querySelector("form");
     form.addEventListener("submit", (e) => this.onSubmit(e, form));
   }
 

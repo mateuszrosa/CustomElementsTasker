@@ -8,12 +8,11 @@ class TaskList extends HTMLElement {
   }
 
   renderTasks(tasks) {
-    const shadowRoot = this.attachShadow({ mode: "closed" });
-    shadowRoot.innerHTML = "";
+    this.innerHTML = "";
     tasks.forEach((task) => {
       const entry = document.createElement("task-entry");
       entry.task = task;
-      shadowRoot.appendChild(entry);
+      this.appendChild(entry);
     });
   }
 }
